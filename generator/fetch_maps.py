@@ -1,5 +1,6 @@
 import requests
 
+
 def fetch_maps():
     url = "https://valorant-api.com/v1/maps"
     r = requests.get(url)

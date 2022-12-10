@@ -1,6 +1,7 @@
 from .create_folder import create_folder
-
 from .fetch_maps import fetch_maps
+
+
 def generate_file_system():
     create_folder("data")
     create_folder("data\\obj")

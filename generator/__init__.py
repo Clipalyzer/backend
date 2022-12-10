@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 __author__ = """Max Kruggel"""
-__email__ = 'max@kruggel.it'
-__version__ = '1.0.0'
+__email__ = "max@kruggel.it"
+__version__ = "1.0.0"
 
 from .generate_file_system import generate_file_system
 from .generate_testing_images import generate_testing_images
