@@ -1,8 +1,4 @@
-from generate_file_system import generate_file_system
-from generate_testing_images import generate_testing_images
-from grab_detailed_images_from_video import grab_detailed_images_from_video
-from grab_images_from_video import grab_images_from_video
-from create_configs import create_configs
+from generator import generate_file_system, grab_images_from_video, grab_detailed_images_from_video,generate_testing_images,create_configs
 import pytesseract
 import sys
 
