@@ -2,8 +2,8 @@ import cv2
 import math
 import json
 import cv2
-from read_dir import read_dir
-from write_file import write_file
+from .read_dir import read_dir
+from .write_file import write_file
 from threading import Thread
 import numpy as np
 

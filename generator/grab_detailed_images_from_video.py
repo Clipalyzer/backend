@@ -1,10 +1,10 @@
-from read_dir import read_dir
-from cleanup_classes import cleanup_classes
+from .read_dir import read_dir
+from .cleanup_classes import cleanup_classes
 import os
 import math
 import json
 import cv2
-from frame_positions import sub_list_from_frame_position
+from .frame_positions import sub_list_from_frame_position
 import numpy as np
 from threading import Thread
 

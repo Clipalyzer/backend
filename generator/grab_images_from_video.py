@@ -1,7 +1,7 @@
-from read_dir import read_dir
-from create_folder import create_folder
-from write_file import write_file
-from frame_positions import sub_list_from_frame_position
+from .read_dir import read_dir
+from .create_folder import create_folder
+from .write_file import write_file
+from .frame_positions import sub_list_from_frame_position
 import pytesseract
 import cv2
 from threading import Thread

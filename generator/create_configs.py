@@ -1,5 +1,5 @@
-from read_dir import read_dir
-from write_file import write_file
+from .read_dir import read_dir
+from .write_file import write_file
 import os
 
 def create_configs():

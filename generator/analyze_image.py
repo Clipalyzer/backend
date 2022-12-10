@@ -2,9 +2,9 @@ import cv2
 import numpy as np
 from PIL import Image
 import pytesseract
-from agents import agents
+from .agents import agents
 import re
-from frame_positions import frame_positions
+from .frame_positions import frame_positions
 
 custom_oem_psm_config = r'--oem 3 --psm 6'
 custom_oem_psm_config_numbers = r'--oem 3 --psm 6 -c tessedit_char_whitelist=0123456789'

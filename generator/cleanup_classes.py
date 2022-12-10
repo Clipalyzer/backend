@@ -1,4 +1,4 @@
-from read_dir import read_dir
+from .read_dir import read_dir
 import os
 
 def cleanup_classes():
