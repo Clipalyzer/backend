@@ -7,6 +7,14 @@ The Valorant Clipalyzer will scan your `video_path` directory defined in [main.p
 * Install [Tesseract](https://github.com/tesseract-ocr/tesseract)
 
 ## Usage
+```
+git clone --recurse-submodules https://github.com/ReDiGermany/clipalyzer.git
+cd clipalyzer
+pip install -r requirements.txt
+cd yolov5
+pip install -r requirements.txt
+cd ..
+```
 * `git clone --recurse-submodules https://github.com/ReDiGermany/clipalyzer.git` to clone this repository to your current folder
 * `pip install -r requirements.txt` to install needed dependencies
 * `python main.py s1` to generate images to categorize
