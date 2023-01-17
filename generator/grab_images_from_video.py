@@ -2,6 +2,7 @@ from .read_dir import read_dir
 from .create_folder import create_folder
 from .write_file import write_file
 from .frame_positions import sub_list_from_frame_position
+from .image_processor import image_processor
 import cv2
 from threading import Thread
 import os
@@ -11,15 +12,16 @@ import numpy as np
 from pathlib import Path
 
 
-def grab_images_within_range(list, path, i):
+def grab_images_within_range(list, path, i, queue):
     n = 0
     my_dict = {}
     for entry in list:
         file = "{}\{}".format(path, entry)
         file_name = "data\\all_images\{}.png".format((len(list) * i) + n)
+        file_name_orig = "data\\all_images\_originals\{}.png".format((len(list) * i) + n)
         print("[{}] {}/{} {}".format(str(i).rjust(2), n, len(list), file_name))
 
-        # emit('generate_initial', json.dumps({"thread":i,"current":n,"max":len(list),"file_name":file_name}))
+        queue.put({"thread": i, "current": n, "max": len(list), "file_name": file_name})
 
         test = 0
 
@@ -35,7 +37,15 @@ def grab_images_within_range(list, path, i):
                 vidcap.set(cv2.CAP_PROP_POS_MSEC, (test * 30 * 1000))
                 success, image = vidcap.read()
             else:
-                cv2.imwrite(file_name, cropped_image)
+                try:
+                    cv2.imwrite(file_name_orig, cropped_image)
+                except:
+                    print("Error writing raw image")
+                try:
+                    # processed_image = image_processor(cropped_image, file_name=file_name)
+                    cv2.imwrite(file_name, cropped_image)
+                except:
+                    print("Error writing processed image")
                 my_dict[file_name] = file
                 # write_file("{}.txt".format(file_name[:-4]),file)
                 break
@@ -43,8 +53,9 @@ def grab_images_within_range(list, path, i):
     write_file("data\\{}.json".format(str(i)), json.dumps(my_dict))
 
 
-def grab_images_from_video(path):
+def grab_images_from_video(path, queue):
     number_of_threads = os.cpu_count()
+    # number_of_threads = 1
     threads = []
     obj = read_dir(path)
     create_folder("data\\all_images")
@@ -52,7 +63,7 @@ def grab_images_from_video(path):
     i = 0
     while i < number_of_threads:
         sub_list = obj[i * items_per_thread : (i + 1) * items_per_thread]
-        t = Thread(target=grab_images_within_range, args=[sub_list, path, i])
+        t = Thread(target=grab_images_within_range, args=[sub_list, path, i, queue])
         t.start()
         threads.append(t)
         i = i + 1
@@ -66,8 +77,9 @@ def grab_images_from_video(path):
             with open(file_name, "r") as file:
                 data = json.loads(file.read().replace("\n", ""))
                 for key in data:
-                    # data\\all_images\\
-                    my_dict[key.split("\\")[2]] = data[key]
+                    s = key.split("\\")
+                    if len(s) == 3:
+                        my_dict[s[2]] = data[key]
             os.remove(file_name)
     write_file("data\\all_images.json", json.dumps(my_dict))
     create_folder("data\\obj")

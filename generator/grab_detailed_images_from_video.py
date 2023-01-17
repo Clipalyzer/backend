@@ -1,3 +1,4 @@
+from .image_processor import image_processor
 from .read_dir import read_dir
 from .cleanup_classes import cleanup_classes
 from .frame_positions import sub_list_from_frame_position
@@ -26,6 +27,7 @@ def grab_detailed_images_from_video(number_of_learn_images_per_thread):
 
     # print(video_cache)
     dir = read_dir("data\\all_images\\")
+    # print(dir)
     for classId in dir:
         dir_name = "data\\all_images\\{}".format(classId)
         subdir = read_dir(dir_name)
@@ -46,6 +48,7 @@ def grab_detailed_images_from_video(number_of_learn_images_per_thread):
                 }
             )
             i = i + 1
+    # print(len(threads))
 
     def grab_detailed_images_from_video_thread(threadId):
         videoId = 0
@@ -67,6 +70,7 @@ def grab_detailed_images_from_video(number_of_learn_images_per_thread):
                         threads[threadId]["images_per_thread"] * (threadId)
                         + threads[threadId]["images_per_video"] * (videoId)
                     ) + frameOffset
+                    cropped_image = image_processor(cropped_image)
                     cv2.imwrite("data\\obj\\{}\\{}.png".format(threads[threadId]["classId"], current_id), cropped_image)
                     found_maps = found_maps + 1
 
@@ -85,6 +89,7 @@ def grab_detailed_images_from_video(number_of_learn_images_per_thread):
                 number_of_gray_pix = np.sum(cropped_image == 126)
                 if number_of_gray_pix > 10_000:
                     current_id = (threads[threadId]["images_per_video"] * (threadId) * (videoId)) + frameOffset
+                    cropped_image = image_processor(cropped_image)
                     cv2.imwrite("data\\obj\\{}\\{}.png".format(threads[threadId]["classId"], current_id), cropped_image)
                     found_maps = found_maps + 1
 
@@ -100,9 +105,9 @@ def grab_detailed_images_from_video(number_of_learn_images_per_thread):
         print("[{}] done".format(threadId))
 
     threadId = 0
-    while threadId < number_of_threads:
+    while threadId < len(threads):
         # threads[threadId]["thread"] = grab_detailed_images_from_video_thread
         t = Thread(target=grab_detailed_images_from_video_thread, args=[threadId])
-        t.start()
         threads[threadId]["thread"] = t
         threadId = threadId + 1
+        t.start()

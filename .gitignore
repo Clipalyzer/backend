@@ -1,4 +1,7 @@
 yolov5s.pt
 data.yaml
-data/
+*data/
 __pycache__/
+*.psd
+*.zip
+_originals/
