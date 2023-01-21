@@ -38,16 +38,11 @@ def grab_images_within_range(list, path, i, queue):
                 success, image = vidcap.read()
             else:
                 try:
-                    cv2.imwrite(file_name_orig, cropped_image)
-                except:
-                    print("Error writing raw image")
-                try:
                     # processed_image = image_processor(cropped_image, file_name=file_name)
                     cv2.imwrite(file_name, cropped_image)
                 except:
                     print("Error writing processed image")
                 my_dict[file_name] = file
-                # write_file("{}.txt".format(file_name[:-4]),file)
                 break
         n = n + 1
     write_file("data\\{}.json".format(str(i)), json.dumps(my_dict))

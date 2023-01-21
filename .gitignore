@@ -4,4 +4,6 @@ data.yaml
 __pycache__/
 *.psd
 *.zip
+*.7z
 _originals/
+*.log

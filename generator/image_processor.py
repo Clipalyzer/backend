@@ -34,6 +34,7 @@ def inside_range(c, px, offset):
 
 
 def image_processor(img, offset=10, file_name=None):
+    return img
     img = img[::2, ::2]
     # print(f"> {img}")
     try:

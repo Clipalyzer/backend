@@ -56,7 +56,7 @@ while success:
 print("100%")
 
 print("Checking images with yolov5")
-cmd = "python yolov5/detect.py --weights ./best.pt --source ./tests --save-txt --save-conf --nosave"
+cmd = "python yolov5/detect.py --weights ./best_color.pt --source ./tests --save-txt --save-conf --nosave"
 subprocess.run(cmd.split(" "), capture_output=True, text=True)
 print("Done checking images")
 
@@ -86,10 +86,14 @@ for idx in maps:
         final_maps.append(maps[idx])
 
 final_maps.sort(key=lambda x: x["count"])
-
+print(final_maps)
 m = final_maps[0]
 
-print("Found map: {} with a overall confidence of {}% @ {} images".format(m["name"], m["cnum"], m["count"]))
+print(
+    "Found map: {} with a overall confidence of {}% @ {} images".format(
+        m["name"], round(m["cnum"] * 100, 2), m["count"]
+    )
+)
 
 subprocess.run("rm -rf tests/".split(" "), capture_output=True, text=True)
 subprocess.run("rm -rf yolov5/runs/detect/".split(" "), capture_output=True, text=True)
