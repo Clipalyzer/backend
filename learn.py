@@ -44,10 +44,10 @@ q = Queue()
 #             # cv2.imwrite(image, img)
 
 # print(images)
-d = read_dir("data\\all_images\\Ascent\\")
-img = cv2.imread(f"data\\all_images\\Ascent\\{d[random.randint(0, len(d))]}")
-img = image_processor(img)
-cv2.imwrite("test.png", img)
+# d = read_dir("data\\all_images\\Ascent\\")
+# img = cv2.imread(f"data\\all_images\\Ascent\\{d[random.randint(0, len(d))]}")
+# img = image_processor(img)
+# cv2.imwrite("test.png", img)
 
 if len(sys.argv) <= 1:
     print('Error! Start with "python {} s1" or "python {} s2"'.format(sys.argv[0], sys.argv[0]))
@@ -74,23 +74,6 @@ if sys.argv[1] == "s2":
     generate_testing_images(number_of_testing_images)
 
     create_configs()
-    classId = -1
-    for dir in read_dir("data\obj"):
-        classId = classId + 1
-        for file in read_dir(f"data\obj\{dir}"):
-            if file.endswith(".png"):
-                write_file(
-                    "data\\obj\\{}\\{}.txt".format(dir, file.split(".")[0]),
-                    "{} 0.5 0.5 1 1".format(classId),
-                )
-
-
-def rgb2gray(rgb):
-    return np.dot(rgb[..., :3], [0.2989, 0.5870, 0.5140])
-
-
-if sys.argv[1] == "s3":
-    # Step #3
     classId = -1
     for dir in read_dir("data\obj"):
         classId = classId + 1
