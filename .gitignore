@@ -7,3 +7,4 @@ __pycache__/
 *.7z
 _originals/
 *.log
+tests/*
