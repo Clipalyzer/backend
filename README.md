@@ -19,6 +19,7 @@ cd ..
 ```
 
 - `git clone --recurse-submodules https://github.com/ReDiGermany/clipalyzer.git` to clone this repository to your current folder
+- `pip install -r yolov5/requirements.txt` to install needed dependencies
 - `pip install -r requirements.txt` to install needed dependencies
 - `python main.py s1` to generate images to categorize
 - `python main.py s2` to generate deep learning images by your own categorization
