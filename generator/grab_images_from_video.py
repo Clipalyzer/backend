@@ -34,7 +34,7 @@ def grab_images_within_range(list, path, i, queue):
             number_of_gray_pix = np.sum(cropped_image == 126)
             if number_of_gray_pix < 10_000:
                 test = test + 1
-                vidcap.set(cv2.CAP_PROP_POS_MSEC, (test * 30 * 1000))
+                vidcap.set(cv2.CAP_PROP_POS_MSEC, (test * 10 * 1000))
                 success, image = vidcap.read()
             else:
                 try:
