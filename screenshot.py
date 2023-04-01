@@ -49,8 +49,6 @@ def do_screenshot(file):
 
 dir = "G:\\Videos\\Videos\\Valorant\\"
 
-print(sys.argv)
-
 if len(sys.argv) == 1:
     print(f"Usage: python {sys.argv[0]} [<folder>|<filename>]")
     sys.exit()
