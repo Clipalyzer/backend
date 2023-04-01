@@ -8,3 +8,6 @@ __pycache__/
 _originals/
 *.log
 tests/*
+*.mp4
+Abgabe.md
+Example*.png
