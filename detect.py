@@ -17,7 +17,15 @@ except OSError as error:
 
 dir = "G:\\Videos\\Videos\\Valorant\\"
 d = read_dir(dir)
-file = f"{dir}\\{random.choice(d)}"
+
+if len(sys.argv) == 1:
+    print(f"Usage: python {sys.argv[0]} [<filename>]")
+    sys.exit()
+
+
+# file = f"{dir}\\{random.choice(d)}"
+# file = f"5k ölig.mp4"
+file = sys.argv[1]
 print(f"Checking file {file}")
 
 
